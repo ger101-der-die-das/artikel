@@ -128,12 +128,12 @@ function hintFor(x){
 
 // ---------- filters ----------
 function renderFilters(){
-  const c = `<button class="chip" id="fAll" aria-pressed="${st.chaps.length === 6}">Tümü</button>` + [1,2,3,4,5,0].map(k => `<button class="chip" data-k="${k}" aria-pressed="${st.chaps.length < 6 && st.chaps.includes(k)}">${k ? 'K' + k : 'Plattform'}</button>`).join('');
+  const c = `<button class="chip" id="fAll" aria-pressed="${st.chaps.length === 6 && st.meta && st.ek && !st.star}">Tümü</button>` + [1,2,3,4,5,0].map(k => `<button class="chip" data-k="${k}" aria-pressed="${st.chaps.length < 6 && st.chaps.includes(k)}">${k ? 'K' + k : 'Plattform'}</button>`).join('');
   $('filters').innerHTML = c + `<button class="chip" id="fStar" aria-pressed="${st.star}"><span class="star">★</span> sadece önemli</button><button class="chip" id="fMeta" aria-pressed="${st.meta}">Talimat kelimeleri</button><button class="chip" id="fEk" aria-pressed="${st.ek}">Listede olmayanlar</button><button class="chip" id="fTr" aria-pressed="${st.hideTr}">Türkçeyi gizle</button><span class="count">${pool().length} kelime</span>`;
 }
 $('filters').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
-  if (b.id === 'fAll') st.chaps = [0,1,2,3,4,5];
+  if (b.id === 'fAll') { st.chaps = [0,1,2,3,4,5]; st.meta = true; st.ek = true; st.star = false; }
   else if (b.dataset.k !== undefined) {
     const k = +b.dataset.k;
     // all selected → tapping one chapter selects only that chapter; otherwise toggle; nothing left → all
