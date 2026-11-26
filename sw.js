@@ -1,6 +1,6 @@
 // Artikel Trainer: works offline. Own files: network first (updates arrive when online), cache as fallback.
 // Google Fonts: cache first.
-const CACHE = 'artikel-v11';
+const CACHE = 'artikel-v14';
 const FILES = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
